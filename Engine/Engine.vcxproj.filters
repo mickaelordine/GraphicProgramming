@@ -16,69 +16,138 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{dbb34435-4e81-491c-a07b-312454bd70a0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Render Flies">
+      <UniqueIdentifier>{eea0a114-47ff-4607-a43b-8af32291c8aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Render Files">
+      <UniqueIdentifier>{f0ceedfd-9c00-4c15-a52a-0496a445af67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Actor Files">
+      <UniqueIdentifier>{13368f02-d922-4a4e-827a-93013965c78b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Actor Files">
+      <UniqueIdentifier>{dfee374a-d4c4-4ff7-907c-6a5c15ae2144}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utils">
+      <UniqueIdentifier>{243d8ed2-cb2e-40c4-ab37-51c9e6b8dd1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Actor Files\Component Files">
+      <UniqueIdentifier>{1934146a-60bc-4f13-a583-ca31d64c2dc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Actor Files\Component Files">
+      <UniqueIdentifier>{709b6393-6f75-418e-ace3-fff4f74d7199}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utils">
+      <UniqueIdentifier>{fc340536-8a82-4761-9a2c-43848c78245f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SystemClass.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="InputClass.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ApplicationClass.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="D3DClass.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ColorShaderClass.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ModelClass.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraClass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TextureShaderClass.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="ApplicationClass.h">
+      <Filter>Header Files\Render Flies</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraClass.h">
+      <Filter>Header Files\Render Flies</Filter>
+    </ClInclude>
+    <ClInclude Include="ColorShaderClass.h">
+      <Filter>Header Files\Render Flies</Filter>
+    </ClInclude>
+    <ClInclude Include="D3DClass.h">
+      <Filter>Header Files\Render Flies</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelClass.h">
+      <Filter>Header Files\Render Flies</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemClass.h">
+      <Filter>Header Files\Render Flies</Filter>
     </ClInclude>
     <ClInclude Include="TextureClass.h">
+      <Filter>Header Files\Render Flies</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureShaderClass.h">
+      <Filter>Header Files\Render Flies</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor.h">
+      <Filter>Header Files\Actor Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Header Files\Actor Files\Component Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteComponent.h">
+      <Filter>Header Files\Actor Files\Component Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SquareComponent.h">
+      <Filter>Header Files\Actor Files\Component Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InputComponent.h">
+      <Filter>Header Files\Actor Files\Component Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveComponent.h">
+      <Filter>Header Files\Actor Files\Component Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ApplicationClass.cpp">
+      <Filter>Source Files\Render Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraClass.cpp">
+      <Filter>Source Files\Render Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ColorShaderClass.cpp">
+      <Filter>Source Files\Render Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D3DClass.cpp">
+      <Filter>Source Files\Render Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelClass.cpp">
+      <Filter>Source Files\Render Files</Filter>
+    </ClCompile>
     <ClCompile Include="SystemClass.cpp">
+      <Filter>Source Files\Render Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureClass.cpp">
+      <Filter>Source Files\Render Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureShaderClass.cpp">
+      <Filter>Source Files\Render Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor.cpp">
+      <Filter>Source Files\Actor Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteComponent.cpp">
+      <Filter>Source Files\Actor Files\Component Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Source Files\Actor Files\Component Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SquareComponent.cpp">
+      <Filter>Source Files\Actor Files\Component Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InputComponent.cpp">
+      <Filter>Source Files\Actor Files\Component Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveComponent.cpp">
+      <Filter>Source Files\Actor Files\Component Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="InputClass.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ApplicationClass.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="D3DClass.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ColorShaderClass.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ModelClass.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CameraClass.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureShaderClass.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureClass.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -88,9 +157,6 @@
     <Image Include="Engine.ico">
       <Filter>Resource Files</Filter>
     </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="readme.md" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="ColorPixelShader.hlsl">
