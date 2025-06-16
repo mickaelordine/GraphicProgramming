@@ -8,7 +8,7 @@
 // INCLUDES //
 //////////////
 #include <windows.h>
-#include "SDL/SDL.h"
+#include "../External/SDL3/include/SDL3/SDL.h"
 #include <unordered_map>
 #include <string>
 #include <vector>

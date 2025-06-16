@@ -1,32 +1,29 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Filename: Engine.cpp
 ////////////////////////////////////////////////////////////////////////////////
-#include "SystemClass.h"
+
 #include "Game.h"
 
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline, int iCmdshow)
 {
-    SystemClass* System;
     Game* game;
     bool result;
 
+    game = new Game();
 
-    // Create the system object.
-    System = new SystemClass;
-
-    // Initialize and run the system object.
-    result = System->Initialize();
+    // Initialize and run the game object.
+    result = game->Initialize();
 
     if (result)
     {
-		System->Run(); //here the main loop is called
+        game->RunLoop(); //here the main loop is called
     }
 
-    // Shutdown and release the system object.
-    System->Shutdown();
-    delete System;
-    System = 0;
+    // Shutdown and release the game object.
+    game->Shutdown();
+    delete game;
+    game = nullptr;
 
     return 0;
 }

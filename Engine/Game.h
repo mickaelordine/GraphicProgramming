@@ -9,12 +9,19 @@
 //////////////
 #include <windows.h>
 
-#include "SDL/SDL.h"
+#include "../External/SDL3/include/SDL3/SDL.h"
 #include <unordered_map>
 #include <string>
 #include <vector>
 #include "Math.h"
 #include "ApplicationClass.h"
+#include "inputclass.h"
+#include <algorithm>
+#include <iostream>
+
+#include "Actor.h"
+#include "SpriteComponent.h"
+#include "SystemClass.h"
 
 class Game
 {
@@ -32,7 +39,7 @@ public:
 	void AddSprite(class SpriteComponent* sprite);
 	void RemoveSprite(class SpriteComponent* sprite);
 
-	class Texture* GetTexture(const std::string& fileName);
+	//class Texture* GetTexture(const std::string& fileName);
 
 	LRESULT CALLBACK MessageHandler(HWND, UINT, WPARAM, LPARAM);
 
@@ -48,18 +55,19 @@ private:
 	void CreateSpriteVerts();
 	void LoadData();
 	void UnloadData();
+
+	//SystemClass integration
 	bool Frame();
 	void InitializeWindows(int&, int&);
 	void ShutdownWindows();
+	void RunSystem();
 
 	// Map of textures loaded
 	std::unordered_map<std::string, class Texture*> m_Textures;
-
 	// All the actors in the game
 	std::vector<class Actor*> m_Actors;
 	// Any pending actors
 	std::vector<class Actor*> m_PendingActors;
-
 	// All the sprite components drawn
 	std::vector<class SpriteComponent*> m_Sprites;
 
@@ -75,9 +83,10 @@ private:
 	HINSTANCE m_hinstance;
 	InputClass* m_Input;
 
-	SDL_Window* m_Window;
-	SDL_GLContext m_Context;
-	Uint32 m_TicksCount;
+
+	/*SDL_Window* m_Window;
+	SDL_GLContext m_Context;*/
+	Uint64 m_TicksCount;
 	bool m_IsRunning;
 	// Track if we're updating actors right now
 	bool m_UpdatingActors;
