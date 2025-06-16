@@ -51,33 +51,11 @@ public:
 	~ApplicationClass();
 
 	bool Initialize(int, int, HWND);
-	void RunLoop();
 	void Shutdown();
 	bool Frame();
 
-	void AddActor(class Actor* actor);
-	void RemoveActor(class Actor* actor);
-
-	void AddSprite(class SpriteComponent* sprite);
-	void RemoveSprite(class SpriteComponent* sprite);
-
-	class Texture* GetTexture(const std::string& fileName);
-
-	// Game-specific (add/remove Blocks)
-	/*void AddBrick(class Brick* ast);
-	void RemoveBrick(class Brick* ast);
-	std::vector<class Brick*>& GetBricks() { return m_Bricks; }*/
-
 private:
 	bool Render();
-
-	void ProcessInput();
-	void UpdateGame();
-	void GenerateOutput();
-	bool LoadShaders();
-	void CreateSpriteVerts();
-	void LoadData();
-	void UnloadData();
 
 private:
 	D3DClass* m_Direct3D;
@@ -85,32 +63,4 @@ private:
 	ModelClass* m_Model;
 	ColorShaderClass* m_ColorShader;
 	TextureShaderClass* m_TextureShader;
-
-	// Map of textures loaded
-	std::unordered_map<std::string, class Texture*> mTextures;
-
-	// All the actors in the game
-	std::vector<class Actor*> mActors;
-	// Any pending actors
-	std::vector<class Actor*> mPendingActors;
-
-	// All the sprite components drawn
-	std::vector<class SpriteComponent*> mSprites;
-
-	// Sprite shader
-	class Shader* mSpriteShader;
-	// Sprite vertex array
-	class VertexArray* mSpriteVerts;
-
-	SDL_Window* mWindow;
-	SDL_GLContext mContext;
-	Uint32 mTicksCount;
-	bool mIsRunning;
-	// Track if we're updating actors right now
-	bool mUpdatingActors;
-
-	// Game-specific (substitute with your own game objects)
-	/*class Ship* mShip;
-	std::vector<class Asteroid*> mAsteroids;*/
-
 };

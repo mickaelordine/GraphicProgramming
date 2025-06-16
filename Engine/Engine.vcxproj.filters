@@ -96,6 +96,9 @@
     <ClInclude Include="MoveComponent.h">
       <Filter>Header Files\Actor Files\Component Files</Filter>
     </ClInclude>
+    <ClInclude Include="CircleComponent.h">
+      <Filter>Header Files\Actor Files\Component Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -147,6 +150,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="InputClass.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleComponent.cpp">
+      <Filter>Source Files\Actor Files\Component Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Math.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
   </ItemGroup>

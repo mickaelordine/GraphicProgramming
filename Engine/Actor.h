@@ -63,5 +63,6 @@ private:
 
 	std::vector<class Component*> m_Components;
 	class Game* m_Game;
+	class ApplicationClass* m_AppClass;
 };
 

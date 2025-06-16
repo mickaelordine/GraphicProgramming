@@ -2,11 +2,13 @@
 // Filename: Engine.cpp
 ////////////////////////////////////////////////////////////////////////////////
 #include "SystemClass.h"
+#include "Game.h"
 
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline, int iCmdshow)
 {
     SystemClass* System;
+    Game* game;
     bool result;
 
 
@@ -15,6 +17,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline,
 
     // Initialize and run the system object.
     result = System->Initialize();
+
     if (result)
     {
 		System->Run(); //here the main loop is called
