@@ -3,12 +3,11 @@
 
 //Inlcudes dependecises from specific game
 //#include "Ship.h"
-//#include "Asteroid.h"
-//#include "Random.h"
+#include "Brick.h"
+#include "Random.h"
 
 Game::Game()
-	: m_SpriteShader(nullptr)
-	, m_IsRunning(true)
+	: m_IsRunning(true)
 	, m_UpdatingActors(false)
 	, m_ApplicationClass(nullptr)
 	, m_Hwnd(nullptr)
@@ -158,29 +157,38 @@ void Game::GenerateOutput()
 		return;
 	}
 
-	for (auto sprite : m_Sprites)
-	{
-		sprite->Draw(m_ApplicationClass); //todo, add Draw function to spritecomponent
+	///////////////////////////////////////////
+	m_ApplicationClass->GetD3D()->BeginScene(0.0f, 0.0f, 0.0f, 1.0f);// Clear the screen to black
+	m_ApplicationClass->GetCamera()->Render();
+	XMMATRIX view, proj;
+	m_ApplicationClass->GetCamera()->GetViewMatrix(view);
+	m_ApplicationClass->GetD3D()->GetProjectionMatrix(proj);
+
+	for (auto sprite : m_Sprites) {
+		sprite->Draw(m_ApplicationClass);
 	}
 
-	// Swap the buffers
-	//SDL_GL_SwapWindow(m_Window);
+	m_ApplicationClass->GetD3D()->EndScene();
+	///////////////////////////////////////////
 }
 
-bool Game::LoadShaders()
+bool Game::LoadTexture(const std::string& name, const std::wstring& filepath)
 {
-	//m_SpriteShader = new Shader();
-	//if (!m_SpriteShader->Load("Shaders/Sprite.vert", "Shaders/Sprite.frag"))
-	//{
-	//	return false;
-	//}
-
-	//m_SpriteShader->SetActive();
-	//// Set the view-projection matrix
-	//Matrix4 viewProj = Matrix4::CreateSimpleViewProj(1280.f, 720.f);
-	//mSpriteShader->SetMatrixUniform("uViewProj", viewProj);
-	//return true;
+	if (m_TextureMap.count(name)) return true;
+	TextureClass* tex = new TextureClass();
+	if (!tex->Initialize(m_ApplicationClass->GetD3D()->GetDevice(), m_ApplicationClass->GetD3D()->GetDeviceContext(), (char*)filepath.c_str())) {
+		delete tex; 
+		return false;
+	}
+	if (m_TextureMap.count(name)) 
+		return true;
+	m_TextureMap[name] = tex;
 	return true;
+}
+
+TextureClass* Game::GetTexture(const std::string& name) {
+	auto it = m_TextureMap.find(name);
+	return it != m_TextureMap.end() ? it->second : nullptr;
 }
 
 void Game::CreateSpriteVerts()
@@ -206,12 +214,12 @@ void Game::LoadData()
 	//mShip = new Ship(this);
 	//mShip->SetRotation(Math::PiOver2);
 
-	//// Create asteroids
-	//const int numAsteroids = 20;
-	//for (int i = 0; i < numAsteroids; i++)
-	//{
-	//	new Asteroid(this);
-	//}
+	// Create Bricks
+	const int numAsteroids = 20;
+	for (int i = 0; i < numAsteroids; i++)
+	{
+		new Brick(this);
+	}
 }
 
 void Game::UnloadData()
@@ -231,30 +239,6 @@ void Game::UnloadData()
 	}
 	m_Textures.clear();*/
 }
-
-//Texture* Game::GetTexture(const std::string& fileName)
-//{
-//	/*Texture* tex = nullptr;
-//	auto iter = m_Textures.find(fileName);
-//	if (iter != m_Textures.end())
-//	{
-//		tex = iter->second;
-//	}
-//	else
-//	{
-//		tex = new Texture();
-//		if (tex->Load(fileName))
-//		{
-//			m_Textures.emplace(fileName, tex);
-//		}
-//		else
-//		{
-//			delete tex;
-//			tex = nullptr;
-//		}
-//	}
-//	return tex;*/
-//}
 
 void Game::Shutdown()
 {
@@ -338,6 +322,10 @@ void Game::RemoveSprite(SpriteComponent* sprite)
 {
 	auto iter = std::find(m_Sprites.begin(), m_Sprites.end(), sprite);
 	m_Sprites.erase(iter);
+}
+
+void Game::AddBricks(class Brick* brk) {
+	m_Bricks.push_back(brk);
 }
 
 /////////////////////////////////////

@@ -35,6 +35,7 @@ public:
 	ModelClass(const ModelClass&);
 	~ModelClass();
 	bool Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceContext, char* textureFilename);
+	bool Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceContext);
 	void Shutdown();
 	void Render(ID3D11DeviceContext*);
 
@@ -47,6 +48,8 @@ private:
 	void RenderBuffers(ID3D11DeviceContext*);
 	bool LoadTexture(ID3D11Device*, ID3D11DeviceContext*, char*);
 	void ReleaseTexture();
+	void SetTexture(TextureClass* tex);
+	ID3D11ShaderResourceView* GetTextureView() const;
 
 private:
 	ID3D11Buffer* m_vertexBuffer, * m_indexBuffer;

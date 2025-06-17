@@ -53,6 +53,10 @@ public:
 	bool Initialize(int, int, HWND);
 	void Shutdown();
 	bool Frame();
+	D3DClass* GetD3D() { return m_Direct3D; }
+	CameraClass* GetCamera() { return m_Camera; }
+	ModelClass* GetModel() { return m_Model; }
+	TextureShaderClass* GetTextureShader() { return m_TextureShader; }
 
 private:
 	bool Render();

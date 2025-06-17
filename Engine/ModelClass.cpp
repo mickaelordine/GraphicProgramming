@@ -10,11 +10,9 @@ ModelClass::ModelClass()
 	m_Texture = nullptr;
 }
 
-
 ModelClass::ModelClass(const ModelClass& other)
 {
 }
-
 
 ModelClass::~ModelClass()
 {
@@ -34,6 +32,21 @@ bool ModelClass::Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceCon
 
 	// Load the texture for this model.
 	result = LoadTexture(device, deviceContext, textureFilename);
+	if (!result)
+	{
+		return false;
+	}
+
+	return true;
+}
+
+bool ModelClass::Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceContext)
+{
+	bool result;
+
+
+	// Initialize the vertex and index buffers.
+	result = InitializeBuffers(device);
 	if (!result)
 	{
 		return false;
@@ -248,4 +261,12 @@ int ModelClass::GetIndexCount()
 ID3D11ShaderResourceView* ModelClass::GetTexture()
 {
 	return m_Texture->GetTexture();
+}
+
+void ModelClass::SetTexture(TextureClass* tex) {
+	m_Texture = tex;  // memorizza puntatore
+}
+
+ID3D11ShaderResourceView* ModelClass::GetTextureView() const {
+	return m_Texture ? m_Texture->GetTexture() : nullptr;
 }

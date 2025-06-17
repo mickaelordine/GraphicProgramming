@@ -39,19 +39,19 @@ public:
 	void AddSprite(class SpriteComponent* sprite);
 	void RemoveSprite(class SpriteComponent* sprite);
 
-	//class Texture* GetTexture(const std::string& fileName);	
+	TextureClass* GetTexture(const std::string& name);
 
 	LRESULT CALLBACK MessageHandler(HWND, UINT, WPARAM, LPARAM);
 
 	// Game-specific (add/remove asteroid)
-	/*void AddAsteroid(class Asteroid* ast);
-	void RemoveAsteroid(class Asteroid* ast);
+	void AddBricks(class Brick* brk);
+	/*void RemoveAsteroid(class Asteroid* ast);
 	std::vector<class Asteroid*>& GetAsteroids() { return mAsteroids; }*/
 private:
 	void ProcessInput();
 	void UpdateGame();
 	void GenerateOutput();
-	bool LoadShaders();
+	bool LoadTexture(const std::string& name, const std::wstring& filepath);
 	void CreateSpriteVerts();
 	void LoadData();
 	void UnloadData();
@@ -63,7 +63,7 @@ private:
 	void RunSystem();
 
 	// Map of textures loaded
-	std::unordered_map<std::string, class TextureClass*> m_Textures;
+	std::unordered_map<std::string, class TextureClass*> m_TextureMap;
 	// All the actors in the game
 	std::vector<class Actor*> m_Actors;
 	// Any pending actors
@@ -71,10 +71,10 @@ private:
 	// All the sprite components drawn
 	std::vector<class SpriteComponent*> m_Sprites;
 
-	// Sprite shader
-	class Shader* m_SpriteShader;
-	// Sprite vertex array
-	class VertexArray* m_SpriteVerts;
+	//// Sprite shader
+	//class Shader* m_SpriteShader;
+	//// Sprite vertex array
+	//class VertexArray* m_SpriteVerts;
 
 	//SystemClassIntegration procedure
 	class ApplicationClass* m_ApplicationClass;
@@ -94,8 +94,8 @@ private:
 	
 
 	// Game-specific
-	/*class Ship* m_Ship;
-	std::vector<class Asteroid*> m_Asteroids;*/
+	//class Ship* m_Ship;
+	std::vector<class Brick*> m_Bricks;
 };
 
 

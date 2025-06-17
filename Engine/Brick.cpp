@@ -17,7 +17,7 @@ Brick::Brick(Game* game)
 
 	// Create a sprite component
 	SpriteComponent* sc = new SpriteComponent(this);
-	//sc->SetTexture(game->GetTexture("Assets/Asteroid.png"));
+	sc->SetTexture(game->GetTexture("../Engine/Textures/Claudio_Bisio.tga"));
 
 
 	// Create a square component (for collision)
@@ -26,7 +26,7 @@ Brick::Brick(Game* game)
 	m_SquareComponent->SetWidth(25.0f);
 
 	// Add to bricks in game
-	//game->AddBricks(this);
+	game->AddBricks(this);
 }
 
 Brick::~Brick()
