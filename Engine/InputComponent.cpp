@@ -9,7 +9,7 @@ InputComponent::InputComponent(class Actor* owner)
 
 }
 
-void InputComponent::ProcessInput(const uint8_t* keyState)
+void InputComponent::ProcessInput(const bool* keyState)
 {
 	// Calculate angular speed for MoveComponent
 	float angularSpeed = 0.0f;

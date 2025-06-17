@@ -76,13 +76,13 @@ void Game::ProcessInput()
 	{
 		switch (event.type)
 		{
-		case SDL_QUIT:
+		case SDL_EVENT_QUIT:
 			m_IsRunning = false;
 			break;
 		}
 	}
 
-	const Uint8* keyState = SDL_GetKeyboardState(NULL);
+	const bool* keyState = SDL_GetKeyboardState(NULL);
 	if (keyState[SDL_SCANCODE_ESCAPE])
 	{
 		m_IsRunning = false;
@@ -100,7 +100,7 @@ void Game::UpdateGame()
 {
 	// Compute delta time
 	// Wait until 16ms has elapsed since last frame
-	while (!SDL_TICKS_PASSED(SDL_GetTicks(), m_TicksCount + 16))
+	while (!(SDL_GetTicks() >= m_TicksCount + 16))
 		;
 
 	float deltaTime = (SDL_GetTicks() - m_TicksCount) / 1000.0f;

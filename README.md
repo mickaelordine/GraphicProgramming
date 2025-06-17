@@ -12,9 +12,8 @@ NOTES:
 1. il progetto usa la scheda grafica di default che viene utilizzata dal computer, se si vuole utilizzare la scheda video dedicata allora bisogna selezionarla tramite il pannello di Nvidia.
 2. ricordarsi di caricare la cartella External che permette al progetto di utilizzare le librerie di SDL3 per x64, prima erano solo x86
 
-
 APPUNTI SUL PROGETTO:
-
+a. aggiunto i corretti path per le addictional directories di SDL3, ora builda correttamente
 
 
 

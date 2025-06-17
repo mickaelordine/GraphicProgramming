@@ -108,14 +108,17 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_UNICODE;UNICODE;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\External\SDL3\include; %(AdditionalIncludeDirectories);</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\External\SDL3\include; %(AdditionalIncludeDirectories);</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)External\SDL3\lib\x64;%(AdditionalLibraryDirectories);</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);$(SolutionDir)External\SDL3\lib\x64\SDL3_test.lib;$(SolutionDir)External\SDL3\lib\x64\SDL3.lib;</AdditionalDependencies>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);..\..\External\SDL3\lib\x64\SDL3_test.lib;..\..\External\SDL3\lib\x64\SDL3.lib;</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(SolutionDir)..\External\SDL3\lib\x64\*.dll" "$(OutDir)" /i /s /y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>

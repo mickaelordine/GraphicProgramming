@@ -8,7 +8,7 @@ public:
 	// Lower update order to update first
 	InputComponent(class Actor* owner);
 
-	void ProcessInput(const uint8_t* keyState) override;
+	void ProcessInput(const bool* keyState) override;
 
 	// Getters/setters for private variables
 	float GetMaxHorz() const { return m_MaxHorzSpeed; }
