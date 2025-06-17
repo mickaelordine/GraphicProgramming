@@ -49,7 +49,7 @@ bool ApplicationClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	m_Model = new ModelClass;
 
 	// Set the name of the texture file that we will be loading.
-	strcpy_s(textureFilename, "../Engine/Textures/Claudio_Bisio.tga");
+	strcpy_s(textureFilename, "../Engine/Textures/Brick.tga");
 	
 
 	result = m_Model->Initialize(m_Direct3D->GetDevice(), m_Direct3D->GetDeviceContext(), textureFilename);

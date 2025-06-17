@@ -140,6 +140,7 @@
   <ItemGroup>
     <ClInclude Include="Actor.h" />
     <ClInclude Include="ApplicationClass.h" />
+    <ClInclude Include="Brick.h" />
     <ClInclude Include="CameraClass.h" />
     <ClInclude Include="CircleComponent.h" />
     <ClInclude Include="ColorShaderClass.h" />
@@ -151,6 +152,7 @@
     <ClInclude Include="Math.h" />
     <ClInclude Include="ModelClass.h" />
     <ClInclude Include="MoveComponent.h" />
+    <ClInclude Include="Random.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SpriteComponent.h" />
     <ClInclude Include="SquareComponent.h" />
@@ -161,6 +163,7 @@
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="ApplicationClass.cpp" />
+    <ClCompile Include="Brick.cpp" />
     <ClCompile Include="CameraClass.cpp" />
     <ClCompile Include="CircleComponent.cpp" />
     <ClCompile Include="ColorShaderClass.cpp" />
@@ -173,6 +176,7 @@
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="ModelClass.cpp" />
     <ClCompile Include="MoveComponent.cpp" />
+    <ClCompile Include="Random.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
     <ClCompile Include="SquareComponent.cpp" />
     <ClCompile Include="SystemClass.cpp" />

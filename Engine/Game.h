@@ -39,7 +39,7 @@ public:
 	void AddSprite(class SpriteComponent* sprite);
 	void RemoveSprite(class SpriteComponent* sprite);
 
-	//class Texture* GetTexture(const std::string& fileName);
+	//class Texture* GetTexture(const std::string& fileName);	
 
 	LRESULT CALLBACK MessageHandler(HWND, UINT, WPARAM, LPARAM);
 
@@ -63,7 +63,7 @@ private:
 	void RunSystem();
 
 	// Map of textures loaded
-	std::unordered_map<std::string, class Texture*> m_Textures;
+	std::unordered_map<std::string, class TextureClass*> m_Textures;
 	// All the actors in the game
 	std::vector<class Actor*> m_Actors;
 	// Any pending actors
