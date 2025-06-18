@@ -40,11 +40,16 @@ public:
 	void RemoveSprite(class SpriteComponent* sprite);
 
 	TextureClass* GetTexture(const std::string& name);
+	std::vector<class Brick*> GetBricks() { return m_Bricks; };
+	std::vector<class Ball*> GetBalls() { return m_Balls; };
 
 	LRESULT CALLBACK MessageHandler(HWND, UINT, WPARAM, LPARAM);
 
-	// Game-specific (add/remove asteroid)
+	// Game-specific (add/remove Balls/Bricks)
 	void AddBricks(class Brick* brk);
+	void AddBalls(class Ball* ball);
+	void RemoveBricks(class Brick* brk);
+	void RemoveBalls(class Ball* ball);
 	/*void RemoveAsteroid(class Asteroid* ast);
 	std::vector<class Asteroid*>& GetAsteroids() { return mAsteroids; }*/
 private:
@@ -94,6 +99,7 @@ private:
 	// Game-specific
 	//class Ship* m_Ship;
 	std::vector<class Brick*> m_Bricks;
+	std::vector<class Ball*> m_Balls;
 };
 
 

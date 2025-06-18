@@ -4,6 +4,7 @@ class Brick : public Actor
 {
 
 public:
+
 	Brick(class Game* game);
 	~Brick();
 

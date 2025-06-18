@@ -23,6 +23,10 @@ void MoveComponent::Update(float deltaTime)
 		Vector2 pos = m_Owner->GetPosition();
 		pos += m_Owner->GetForward() * m_ForwardSpeed * deltaTime;
 
-		m_Owner->SetPosition(pos);
+		// Screen Bouncing (for balls)
+		if (pos.x < -70.0f) { m_HorizzontalSpeed = -m_HorizzontalSpeed; }
+		else if (pos.x > 70.0f) { m_HorizzontalSpeed = -m_HorizzontalSpeed; }
+		if (pos.y < -25.0f) { m_ForwardSpeed = -m_ForwardSpeed; }
+		else if (pos.y > 25.0f) { m_ForwardSpeed = -m_ForwardSpeed; }
 	}
 }

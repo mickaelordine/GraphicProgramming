@@ -1,10 +1,11 @@
 #include "Game.h"
-
-
-//Inlcudes dependecises from specific game
-//#include "Ship.h"
-#include "Brick.h"
 #include "Random.h"
+
+//////////////////////////////////////////
+//Inlcudes dependecises from specific game
+//////////////////////////////////////////
+#include "Brick.h"
+#include "Ball.h"
 
 Game::Game()
 	: m_IsRunning(true)
@@ -150,28 +151,15 @@ void Game::GenerateOutput()
 		return;
 	}
 
-	// Do the frame processing for the application class object.
-	/*bool result = m_ApplicationClass->Frame();
-	if (!result)
-	{
-		return;
-	}*/
-
-	///////////////////////////////////////////
 	m_ApplicationClass->GetD3D()->BeginScene(0.0f, 0.0f, 0.0f, 1.0f);// Clear the screen to black
 	m_ApplicationClass->GetCamera()->Render();
-
-	/*XMMATRIX view, proj, worldMatrix;
-	m_ApplicationClass->GetD3D()->GetWorldMatrix(worldMatrix);
-	m_ApplicationClass->GetCamera()->GetViewMatrix(view);
-	m_ApplicationClass->GetD3D()->GetProjectionMatrix(proj);*/
 
 	for (auto sprite : m_Sprites) {
 		sprite->Draw(m_ApplicationClass);
 	}
+	//error Exception thrown: read access violation. sprite->was 0xFFFFFFFFFFFFFFDF.
 
 	m_ApplicationClass->GetD3D()->EndScene();
-	///////////////////////////////////////////
 }
 
 bool Game::LoadTexture(const std::string& name, const char* filepath)
@@ -196,7 +184,7 @@ TextureClass* Game::GetTexture(const std::string& name) {
 
 void Game::LoadData()
 {
-
+	//load all the necessary texture for the game
 	LoadTexture("Bisio", "../Engine/Textures/Claudio_Bisio.tga");
 	LoadTexture("Brick", "../Engine/Textures/Brick.tga");
 	LoadTexture("Ball", "../Engine/Textures/sample-tga-files-sample_640x426.tga");
@@ -205,12 +193,17 @@ void Game::LoadData()
 	//mShip = new Ship(this);
 	//mShip->SetRotation(Math::PiOver2);
 
+	//create ball
+	new Ball(this);
+
 	// Create Bricks
 	const int numBricks = 20;
 	for (int i = 0; i < numBricks; i++)
 	{
 		new Brick(this);
 	}
+
+	
 }
 
 void Game::UnloadData()
@@ -267,7 +260,6 @@ void Game::AddActor(Actor* actor)
 		m_Actors.emplace_back(actor);
 	}
 }
-
 void Game::RemoveActor(Actor* actor)
 {
 	// Is it in pending actors?
@@ -308,7 +300,6 @@ void Game::AddSprite(SpriteComponent* sprite)
 	// Inserts element before position of iterator
 	m_Sprites.insert(iter, sprite);
 }
-
 void Game::RemoveSprite(SpriteComponent* sprite)
 {
 	auto iter = std::find(m_Sprites.begin(), m_Sprites.end(), sprite);
@@ -316,7 +307,26 @@ void Game::RemoveSprite(SpriteComponent* sprite)
 }
 
 void Game::AddBricks(class Brick* brk) {
-	m_Bricks.push_back(brk);
+	m_Bricks.emplace_back(brk);
+}
+void Game::AddBalls(class Ball* ball) {
+	m_Balls.emplace_back(ball);
+}
+void Game::RemoveBricks(class Brick* brk) {
+	auto iter = std::find(m_Bricks.begin(),
+		m_Bricks.end(), brk);
+	if (iter != m_Bricks.end())
+	{
+		m_Bricks.erase(iter);
+	}
+}
+void Game::RemoveBalls(class Ball* ball) {
+	auto iter = std::find(m_Balls.begin(),
+		m_Balls.end(), ball);
+	if (iter != m_Balls.end())
+	{
+		m_Balls.erase(iter);
+	}
 }
 
 /////////////////////////////////////

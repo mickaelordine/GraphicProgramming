@@ -10,8 +10,9 @@ SpriteComponent::SpriteComponent(Actor* owner, int order)
     m_Owner->GetGame()->AddSprite(this);
 }
 
-SpriteComponent::~SpriteComponent() {
-
+SpriteComponent::~SpriteComponent() 
+{
+    m_Owner->GetGame()->RemoveSprite(this);
 }
 
 void SpriteComponent::SetTexture(const std::string& name) {

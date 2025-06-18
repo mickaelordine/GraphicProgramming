@@ -140,6 +140,7 @@
   <ItemGroup>
     <ClInclude Include="Actor.h" />
     <ClInclude Include="ApplicationClass.h" />
+    <ClInclude Include="Ball.h" />
     <ClInclude Include="Brick.h" />
     <ClInclude Include="CameraClass.h" />
     <ClInclude Include="CircleComponent.h" />
@@ -163,6 +164,7 @@
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="ApplicationClass.cpp" />
+    <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="CameraClass.cpp" />
     <ClCompile Include="CircleComponent.cpp" />
