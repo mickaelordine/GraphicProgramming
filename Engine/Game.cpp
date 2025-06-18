@@ -151,18 +151,20 @@ void Game::GenerateOutput()
 	}
 
 	// Do the frame processing for the application class object.
-	bool result = m_ApplicationClass->Frame();
+	/*bool result = m_ApplicationClass->Frame();
 	if (!result)
 	{
 		return;
-	}
+	}*/
 
 	///////////////////////////////////////////
 	m_ApplicationClass->GetD3D()->BeginScene(0.0f, 0.0f, 0.0f, 1.0f);// Clear the screen to black
 	m_ApplicationClass->GetCamera()->Render();
-	XMMATRIX view, proj;
+
+	/*XMMATRIX view, proj, worldMatrix;
+	m_ApplicationClass->GetD3D()->GetWorldMatrix(worldMatrix);
 	m_ApplicationClass->GetCamera()->GetViewMatrix(view);
-	m_ApplicationClass->GetD3D()->GetProjectionMatrix(proj);
+	m_ApplicationClass->GetD3D()->GetProjectionMatrix(proj);*/
 
 	for (auto sprite : m_Sprites) {
 		sprite->Draw(m_ApplicationClass);
@@ -172,11 +174,12 @@ void Game::GenerateOutput()
 	///////////////////////////////////////////
 }
 
-bool Game::LoadTexture(const std::string& name, const std::wstring& filepath)
+bool Game::LoadTexture(const std::string& name, const char* filepath)
 {
 	if (m_TextureMap.count(name)) return true;
 	TextureClass* tex = new TextureClass();
-	if (!tex->Initialize(m_ApplicationClass->GetD3D()->GetDevice(), m_ApplicationClass->GetD3D()->GetDeviceContext(), (char*)filepath.c_str())) {
+	if (!tex->Initialize(m_ApplicationClass->GetD3D()->GetDevice(), m_ApplicationClass->GetD3D()->GetDeviceContext(), filepath))
+	{
 		delete tex; 
 		return false;
 	}
@@ -191,32 +194,20 @@ TextureClass* Game::GetTexture(const std::string& name) {
 	return it != m_TextureMap.end() ? it->second : nullptr;
 }
 
-void Game::CreateSpriteVerts()
-{
-	//float vertices[] = {
-	//	-0.5f,  0.5f, 0.f, 0.f, 0.f, 1.0f, 0.0f, 0.0f, // rosso // top left
-	//	 0.5f,  0.5f, 0.f, 1.f, 0.f, 0.0f, 1.0f, 0.0f, // verde // top right
-	//	 0.5f, -0.5f, 0.f, 1.f, 1.f, 0.0f, 0.0f, 1.0f, // blu // bottom right
-	//	-0.5f, -0.5f, 0.f, 0.f, 1.f, 1.0f, 1.0f, 0.0f  // giallo// bottom left
-	//};
-
-	//unsigned int indices[] = {
-	//	0, 1, 2,
-	//	2, 3, 0
-	//};
-
-	//mSpriteVerts = new VertexArray(vertices, 4, indices, 6);
-}
-
 void Game::LoadData()
 {
+
+	LoadTexture("Bisio", "../Engine/Textures/Claudio_Bisio.tga");
+	LoadTexture("Brick", "../Engine/Textures/Brick.tga");
+	LoadTexture("Ball", "../Engine/Textures/sample-tga-files-sample_640x426.tga");
+
 	//// Create player's ship
 	//mShip = new Ship(this);
 	//mShip->SetRotation(Math::PiOver2);
 
 	// Create Bricks
-	const int numAsteroids = 20;
-	for (int i = 0; i < numAsteroids; i++)
+	const int numBricks = 20;
+	for (int i = 0; i < numBricks; i++)
 	{
 		new Brick(this);
 	}
@@ -332,27 +323,6 @@ void Game::AddBricks(class Brick* brk) {
 //SYSTEMCLASS INTEGRATION INSIDE GAME
 /////////////////////////////////////
 
-bool Game::Frame()
-{
-	bool result;
-
-
-	// Check if the user pressed escape and wants to exit the application.
-	if (m_Input->IsKeyDown(VK_ESCAPE))
-	{
-		return false;
-	}
-
-	// Do the frame processing for the application class object.
-	result = m_ApplicationClass->Frame();
-	if (!result)
-	{
-		return false;
-	}
-
-	return true;
-}
-
 void Game::RunSystem() {
 	MSG msg;
 	bool done, result;
@@ -379,11 +349,7 @@ void Game::RunSystem() {
 	else
 	{
 		// Otherwise do the frame processing.
-		result = Frame();
-		if (!result)
-		{
-			done = true;
-		}
+		GenerateOutput();
 	}
 
 	return;

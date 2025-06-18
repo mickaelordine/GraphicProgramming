@@ -9,15 +9,17 @@ Brick::Brick(Game* game)
 	, m_SquareComponent(nullptr)
 {
 	// Initialize to random position/orientation
-	Vector2 randPos = Random::GetVector(Vector2(-512.0f, -384.0f),
-		Vector2(512.0f, 384.0f));
+	Vector2 randPos = Random::GetVector(Vector2(50.0f, 25.0f),
+		Vector2(-50.0f, -25.0f));
 	SetPosition(randPos);
 
 	SetRotation(Random::GetFloatRange(0.0f, Math::TwoPi));
 
+	//HERE WE NEED TO CREATE A FILE PARSER FOR THE MAPS
+
 	// Create a sprite component
 	SpriteComponent* sc = new SpriteComponent(this);
-	sc->SetTexture(game->GetTexture("../Engine/Textures/Claudio_Bisio.tga"));
+	sc->SetTexture(game->GetTexture("Brick"));
 
 
 	// Create a square component (for collision)

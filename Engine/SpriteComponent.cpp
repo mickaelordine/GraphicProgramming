@@ -7,6 +7,7 @@ SpriteComponent::SpriteComponent(Actor* owner, int order)
 	: Component(owner)
 	, m_DrawOrder(order)
 {
+    m_Owner->GetGame()->AddSprite(this);
 }
 
 SpriteComponent::~SpriteComponent() {

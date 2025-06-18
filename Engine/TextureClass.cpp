@@ -21,7 +21,7 @@ TextureClass::~TextureClass()
 {
 }
 
-bool TextureClass::Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceContext, char* filename)
+bool TextureClass::Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceContext, const char* filename)
 {
 	bool result;
 	int height, width;
@@ -113,7 +113,7 @@ ID3D11ShaderResourceView* TextureClass::GetTexture()
 	return m_textureView;
 }
 
-bool TextureClass::LoadTarga32Bit(char* filename)
+bool TextureClass::LoadTarga32Bit(const char* filename)
 {
 	int error, bpp, imageSize, index, i, j, k;
 	FILE* filePtr;

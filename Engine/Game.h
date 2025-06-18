@@ -51,13 +51,11 @@ private:
 	void ProcessInput();
 	void UpdateGame();
 	void GenerateOutput();
-	bool LoadTexture(const std::string& name, const std::wstring& filepath);
-	void CreateSpriteVerts();
+	bool LoadTexture(const std::string& name,const char* filepath);
 	void LoadData();
 	void UnloadData();
 
 	//SystemClass integration
-	bool Frame();
 	void InitializeWindows(int&, int&);
 	void ShutdownWindows();
 	void RunSystem();

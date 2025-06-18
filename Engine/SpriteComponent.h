@@ -20,7 +20,6 @@ public:
 	int GetTexWidth() const { return m_TexWidth; }
 protected:
 	class TextureClass* m_Texture;
-	class ApplicationClass* m_ApplicationClass;
 	int m_DrawOrder;
 	int m_TexWidth;
 	int m_TexHeight;

@@ -43,7 +43,7 @@ bool ApplicationClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	m_Camera = new CameraClass;
 
 	// Set the initial position of the camera.
-	m_Camera->SetPosition(0.0f, 0.0f, -15.0f);
+	m_Camera->SetPosition(0.0f, 0.0f, -90.0f);
 
 	// Create and initialize the model object.
 	m_Model = new ModelClass;
@@ -59,6 +59,7 @@ bool ApplicationClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 		MessageBox(hwnd, L"Could not initialize the shader object.", L"Error", MB_OK);
 		return false;
 	}
+	
 
 	// Create and initialize the texture shader object.
 	m_TextureShader = new TextureShaderClass;
