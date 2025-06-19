@@ -10,6 +10,5 @@ SquareComponent::SquareComponent(Actor* owner)
 }
 
 const Vector2& SquareComponent::GetCenter() const{
-	if(m_Owner->GetState() != 1 && m_Owner->GetState() != 2)
-		return m_Owner->GetPosition(); //accessviolation here
+	return m_Owner->GetPosition(); //accessviolation here
 }

@@ -141,6 +141,8 @@ void Game::UpdateGame()
 	{
 		delete actor;
 	}
+
+	//std::cout << "Game::UpdateGame() - Bisio Position: X:" << m_Balls.at(0)->GetPosition().x << " Y: " << m_Balls.at(0)->GetPosition().y << std::endl;
 }
 
 void Game::GenerateOutput()

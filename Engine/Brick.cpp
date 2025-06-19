@@ -25,8 +25,8 @@ Brick::Brick(Game* game)
 
 	// Create a square component (for collision)
 	m_SquareComponent = new SquareComponent(this);
-	m_SquareComponent->SetHeight(25.0f);
-	m_SquareComponent->SetWidth(25.0f);
+	m_SquareComponent->SetHeight(5.0f);
+	m_SquareComponent->SetWidth(5.0f);
 
 	// Add to bricks in game
 	game->AddBricks(this);
@@ -34,5 +34,5 @@ Brick::Brick(Game* game)
 
 Brick::~Brick()
 {
-	//GetGame()->RemoveBricks(this);
+	GetGame()->RemoveBricks(this);
 }
