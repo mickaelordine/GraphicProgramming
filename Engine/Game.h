@@ -42,6 +42,8 @@ public:
 	TextureClass* GetTexture(const std::string& name);
 	std::vector<class Brick*> GetBricks() { return m_Bricks; };
 	std::vector<class Ball*> GetBalls() { return m_Balls; };
+	std::vector<class BouncingWall*> GetWalls() { return m_Walls; };
+	class Platform* GetPlatform() { return m_Platform; };
 
 	LRESULT CALLBACK MessageHandler(HWND, UINT, WPARAM, LPARAM);
 
@@ -50,6 +52,8 @@ public:
 	void AddBalls(class Ball* ball);
 	void RemoveBricks(class Brick* brk);
 	void RemoveBalls(class Ball* ball);
+	void AddWalls(class BouncingWall* wall);
+	void RemoveWalls(class BouncingWall* wall);
 	/*void RemoveAsteroid(class Asteroid* ast);
 	std::vector<class Asteroid*>& GetAsteroids() { return mAsteroids; }*/
 private:
@@ -100,6 +104,8 @@ private:
 	//class Ship* m_Ship;
 	std::vector<class Brick*> m_Bricks;
 	std::vector<class Ball*> m_Balls;
+	std::vector<class BouncingWall*> m_Walls;
+	class Platform* m_Platform;
 };
 
 

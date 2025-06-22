@@ -1,5 +1,7 @@
 #pragma once
 #include <cstdint>
+#include "SDL3/SDL.h"
+#include "InputClass.h"
 
 class Component
 {
@@ -12,7 +14,7 @@ public:
 	// Update this component by delta time
 	virtual void Update(float deltaTime);
 	// Process input for this component
-	virtual void ProcessInput(const bool* keyState) {}
+	virtual void ProcessInput(InputClass* keyState) {}
 	// Called when world transform changes
 	virtual void OnUpdateWorldTransform() {}
 

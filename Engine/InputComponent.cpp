@@ -1,6 +1,10 @@
 #include "InputComponent.h"
 #include "Actor.h"
 
+//defines for keyboard
+#define VK_LEFT           0x25
+#define VK_RIGHT          0x27
+
 InputComponent::InputComponent(class Actor* owner)
 	:MoveComponent(owner)
 	, m_RightKey(0)
@@ -9,17 +13,17 @@ InputComponent::InputComponent(class Actor* owner)
 
 }
 
-void InputComponent::ProcessInput(const bool* keyState)
+void InputComponent::ProcessInput(InputClass* keyState)
 {
 	// Calculate angular speed for MoveComponent
-	float angularSpeed = 0.0f;
-	if (keyState[m_RightKey])
+	float horzSpeed = 0.0f;
+	if (keyState->IsKeyDown(VK_RIGHT) && m_Owner->GetPosition().x < 70.0f)
 	{
-		angularSpeed += m_MaxHorzSpeed;
+		horzSpeed += m_MaxHorzSpeed;
 	}
-	if (keyState[m_LeftKey])
+	if (keyState->IsKeyDown(VK_LEFT) && m_Owner->GetPosition().x > -70.0f)
 	{
-		angularSpeed -= m_MaxHorzSpeed;
+		horzSpeed -= m_MaxHorzSpeed;
 	}
-	SetMaxHorzSpeed(angularSpeed);
+	SetHorizontalSpeed(horzSpeed);
 }

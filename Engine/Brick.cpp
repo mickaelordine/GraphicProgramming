@@ -13,7 +13,6 @@ Brick::Brick(Game* game)
 		Vector2(-60.0f, -10.0f));
 	SetPosition(randPos);
 
-	//SetRotation(Random::GetFloatRange(0.0f, Math::TwoPi));
 	SetRotation(Random::GetFloatRange(0.0f, 0.0f));
 
 	//HERE WE NEED TO CREATE A FILE PARSER FOR THE MAPS
@@ -25,8 +24,8 @@ Brick::Brick(Game* game)
 
 	// Create a square component (for collision)
 	m_SquareComponent = new SquareComponent(this);
-	m_SquareComponent->SetHeight(5.0f);
-	m_SquareComponent->SetWidth(5.0f);
+	m_SquareComponent->SetHeight(2.0f);
+	m_SquareComponent->SetWidth(4.0f);
 
 	// Add to bricks in game
 	game->AddBricks(this);

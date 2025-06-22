@@ -114,6 +114,12 @@
     <ClInclude Include="Ball.h">
       <Filter>Header Files\Actor Files\SpecificActors</Filter>
     </ClInclude>
+    <ClInclude Include="BouncingWall.h">
+      <Filter>Header Files\Actor Files\SpecificActors</Filter>
+    </ClInclude>
+    <ClInclude Include="Platform.h">
+      <Filter>Header Files\Actor Files\SpecificActors</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -180,6 +186,12 @@
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
     <ClCompile Include="Ball.cpp">
+      <Filter>Source Files\Actor Files\SpecificActors</Filter>
+    </ClCompile>
+    <ClCompile Include="BouncingWall.cpp">
+      <Filter>Source Files\Actor Files\SpecificActors</Filter>
+    </ClCompile>
+    <ClCompile Include="Platform.cpp">
       <Filter>Source Files\Actor Files\SpecificActors</Filter>
     </ClCompile>
   </ItemGroup>

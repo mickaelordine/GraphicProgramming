@@ -2,6 +2,8 @@
 #include <vector>
 #include "Math.h"
 #include <cstdint>
+#include "SDL3/SDL.h"
+#include "InputClass.h"
 
 class Actor
 {
@@ -24,9 +26,9 @@ public:
 	virtual void UpdateActor(float deltaTime);
 
 	// ProcessInput function called from Game (not overridable)
-	void ProcessInput(const bool* keyState);
+	void ProcessInput(InputClass* keyState);
 	// Any actor-specific input code (overridable)
-	virtual void ActorInput(const bool* keyState);
+	virtual void ActorInput(InputClass* keyState);
 
 	// Getters/setters
 	const Vector2& GetPosition() const { return m_Position; }

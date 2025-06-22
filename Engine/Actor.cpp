@@ -50,7 +50,7 @@ void Actor::UpdateActor(float deltaTime)
 {
 }
 
-void Actor::ProcessInput(const bool* keyState)
+void Actor::ProcessInput(InputClass* keyState)
 {
 	if (m_State == EActive)
 	{
@@ -64,7 +64,7 @@ void Actor::ProcessInput(const bool* keyState)
 	}
 }
 
-void Actor::ActorInput(const bool* keyState)
+void Actor::ActorInput(InputClass* keyState)
 {
 }
 

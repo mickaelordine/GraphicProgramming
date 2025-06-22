@@ -11,24 +11,24 @@ MoveComponent::MoveComponent(class Actor* owner, int updateOrder)
 
 void MoveComponent::Update(float deltaTime)
 {
-	if (!Math::NearZero(m_HorizzontalSpeed))
+	/*if (!Math::NearZero(m_HorizzontalSpeed))
 	{
 		float rot = m_Owner->GetRotation();
 		rot += m_HorizzontalSpeed * deltaTime;
 		m_Owner->SetRotation(rot);
+	}*/
+
+	if (!Math::NearZero(m_HorizzontalSpeed))
+	{
+		Vector2 pos = m_Owner->GetPosition();
+		pos.x += m_HorizzontalSpeed * deltaTime;
+		m_Owner->SetPosition(pos);
 	}
 
 	if (!Math::NearZero(m_ForwardSpeed))
 	{
 		Vector2 pos = m_Owner->GetPosition();
 		pos += m_Owner->GetForward() * m_ForwardSpeed * deltaTime; //check here
-
-		// Screen Bouncing (for balls)
-		if (pos.x < -70.0f) { m_HorizzontalSpeed = -m_HorizzontalSpeed; }
-		else if (pos.x > 70.0f) { m_HorizzontalSpeed = -m_HorizzontalSpeed; }
-		if (pos.y < -40.0f) { m_ForwardSpeed = -m_ForwardSpeed; }
-		else if (pos.y > 40.0f) { m_ForwardSpeed = -m_ForwardSpeed; }
-
-		m_Owner->SetPosition(pos);
+		m_Owner->SetPosition(pos);		
 	}
 }

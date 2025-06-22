@@ -6,6 +6,8 @@
 //////////////////////////////////////////
 #include "Brick.h"
 #include "Ball.h"
+#include "BouncingWall.h"
+#include "Platform.h"
 
 Game::Game()
 	: m_IsRunning(true)
@@ -69,31 +71,20 @@ void Game::RunLoop()
 	}
 }
 
-void Game::ProcessInput()
-{
-	SDL_Event event;
-	while (SDL_PollEvent(&event))
-	{
-		switch (event.type)
-		{
-		case SDL_EVENT_QUIT:
-			m_IsRunning = false;
-			break;
-		}
-	}
-
-	const bool* keyState = SDL_GetKeyboardState(NULL);
-	if (keyState[SDL_SCANCODE_ESCAPE])
+void Game::ProcessInput()  
+{  
+	// Check if the user pressed escape and wants to exit the application.
+	if (m_Input->IsKeyDown(VK_ESCAPE))
 	{
 		m_IsRunning = false;
 	}
 
-	m_UpdatingActors = true;
-	for (auto actor : m_Actors)
-	{
-		actor->ProcessInput(keyState);
-	}
-	m_UpdatingActors = false;
+    m_UpdatingActors = true;  
+    for (auto actor : m_Actors)  
+    {  
+        actor->ProcessInput(m_Input);
+    }  
+    m_UpdatingActors = false;  
 }
 
 void Game::UpdateGame()
@@ -142,7 +133,6 @@ void Game::UpdateGame()
 		delete actor;
 	}
 
-	//std::cout << "Game::UpdateGame() - Bisio Position: X:" << m_Balls.at(0)->GetPosition().x << " Y: " << m_Balls.at(0)->GetPosition().y << std::endl;
 }
 
 void Game::GenerateOutput()
@@ -190,22 +180,33 @@ void Game::LoadData()
 	LoadTexture("Bisio", "../Engine/Textures/Claudio_Bisio.tga");
 	LoadTexture("Brick", "../Engine/Textures/Brick.tga");
 	LoadTexture("Ball", "../Engine/Textures/sample-tga-files-sample_640x426.tga");
+	LoadTexture("Platform", "../Engine/Textures/arkanoidPlatform.tga");
 
-	//// Create player's ship
-	//mShip = new Ship(this);
-	//mShip->SetRotation(Math::PiOver2);
+	//create Player Platform
+	m_Platform = new Platform(this);
 
 	//create ball
 	new Ball(this);
 
 	// Create Bricks
-	const int numBricks = 20;
+	const int numBricks = 40;
 	for (int i = 0; i < numBricks; i++)
 	{
 		new Brick(this);
 	}
 
+	//CreateWalls
+	//leftWall
+	//new BouncingWall(this, Vector2(0.0f, 0.0f), 180.0f);
+	////rightWall
+	//new BouncingWall(this, Vector2(70.0f, 0.0f), 90.0f);
+	////topWall
+	//new BouncingWall(this, Vector2(0.0f, 60.0f), 0.0f);
+	////bottomWall
+	//new BouncingWall(this, Vector2(0.0f, -60.0f), 0.0f);
+
 	
+
 }
 
 void Game::UnloadData()
@@ -308,11 +309,18 @@ void Game::RemoveSprite(SpriteComponent* sprite)
 	m_Sprites.erase(iter);
 }
 
+//////////////////////////////////
+// ACTOR MANAGEMENT INSIDE GAME
+//////////////////////////////////
 void Game::AddBricks(class Brick* brk) {
 	m_Bricks.emplace_back(brk);
 }
 void Game::AddBalls(class Ball* ball) {
 	m_Balls.emplace_back(ball);
+}
+void Game::AddWalls(class BouncingWall* wall)
+{
+	m_Walls.emplace_back(wall);
 }
 void Game::RemoveBricks(class Brick* brk) {
 	auto iter = std::find(m_Bricks.begin(),
@@ -330,7 +338,15 @@ void Game::RemoveBalls(class Ball* ball) {
 		m_Balls.erase(iter);
 	}
 }
-
+void Game::RemoveWalls(class BouncingWall* wall) 
+{
+	auto iter = std::find(m_Walls.begin(),
+		m_Walls.end(), wall);
+	if (iter != m_Walls.end())
+	{
+		m_Walls.erase(iter);
+	}
+}
 /////////////////////////////////////
 //SYSTEMCLASS INTEGRATION INSIDE GAME
 /////////////////////////////////////
@@ -522,7 +538,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT umessage, WPARAM wparam, LPARAM lparam)
 	// All other messages pass to the message handler in the system class.
 	default:
 	{
-		return ApplicationHandle->MessageHandler(hwnd, umessage, wparam, lparam);
+		return GameHandle->MessageHandler(hwnd, umessage, wparam, lparam);
 	}
 	}
 }

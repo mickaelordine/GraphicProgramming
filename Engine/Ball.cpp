@@ -6,6 +6,8 @@
 #include "CircleComponent.h"
 #include "MoveComponent.h"
 #include "Brick.h"
+#include "BouncingWall.h"
+#include "Platform.h"
 
 
 Ball::Ball(Game* game)
@@ -17,7 +19,7 @@ Ball::Ball(Game* game)
 	Vector2 randPos = Vector2(0.0f, -30.0f);
 	SetPosition(randPos);
 
-	SetRotation(Random::GetFloatRange(0.0f, Math::TwoPi));
+	SetRotation(45.0f);
 
 	// Create a sprite component
 	SpriteComponent* sc = new SpriteComponent(this);
@@ -29,7 +31,7 @@ Ball::Ball(Game* game)
 
 	// Create a move component, and set a forward speed
 	m_MoveComponent = new MoveComponent(this);
-	m_MoveComponent->SetForwardSpeed(30.0f);
+	m_MoveComponent->SetForwardSpeed(45.0f);
 
 	// Add to bricks in game
 	game->AddBalls(this);
@@ -78,4 +80,42 @@ void Ball::UpdateActor(float deltaTime)
 			break;
 		}
 	}
+	
+	//Do we intersect with the platform
+	auto plt = GetGame()->GetPlatform();
+	if (IntersectCircleSquare(*m_CircleComponent, *(plt->GetSquareComponent())))
+	{
+		// Reverse the direction of the ball
+		Vector2 ballPos = GetPosition();
+		Vector2 pltPos = plt->GetPosition();
+		Vector2 diff = ballPos - pltPos;
+
+		// Calcola l'angolo corrente
+		float currentAngle = GetRotation();
+						
+		if (diff.y > 0)
+			SetRotation(Math::ToRadians(315.0f)); // va in basso
+		else
+			SetRotation(Math::ToRadians(225.0f)); // va in alto
+	}
+	
+
+	// Screen Bouncing (for balls)
+	if (GetPosition().x < -70.0f) //collision with left "wall"
+	{
+		SetRotation(Math::Pi - GetRotation()); //bounce off the wall
+	}
+	else if (GetPosition().x > 70.0f) //collision with right "wall"
+	{
+		SetRotation(Math::Pi - GetRotation()); //bounce off the wall
+	}
+	if (GetPosition().y < -40.0f) //collision with bottom "wall" Should Die here
+	{
+		SetRotation(-GetRotation()); //bounce off the wall 
+	}
+	else if (GetPosition().y > 40.0f) //collision with upper "wall"
+	{
+		SetRotation(-GetRotation()); //bounce off the wall
+	}
+
 }
