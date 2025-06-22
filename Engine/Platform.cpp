@@ -28,8 +28,8 @@ Platform::Platform(Game* game)
 
 	// Create a square component (for collision)
 	m_SquareComponent = new SquareComponent(this);
-	m_SquareComponent->SetHeight(3.0f);
-	m_SquareComponent->SetWidth(20.0f);
+	m_SquareComponent->SetHeight(5.0f);
+	m_SquareComponent->SetWidth(15.0f);
 
 	// Create an input component and set keys/speed
 	InputComponent* ic = new InputComponent(this);

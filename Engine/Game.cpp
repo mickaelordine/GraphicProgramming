@@ -189,11 +189,32 @@ void Game::LoadData()
 	new Ball(this);
 
 	// Create Bricks
-	const int numBricks = 40;
-	for (int i = 0; i < numBricks; i++)
+	const int numBricks = 11;
+	const int numRows = 4;
+
+	float minX = -60.0f;
+	float maxX = 60.0f;
+	float minY = -10.0f;
+	float maxY = 35.0f;
+
+	// Calcola passo tra i brick
+	float stepX = (maxX - minX) / (numBricks - 1); // -60 to 60
+	float stepY = (maxY - minY) / (numRows - 1);   // -10 to 35
+
+	for (int j = 0; j < numRows; j++)
 	{
-		new Brick(this);
+		for (int i = 0; i < numBricks; i++)
+		{
+			Brick* tmpB = new Brick(this);
+
+			float posX = minX + i * stepX;
+			float posY = minY + j * stepY;
+
+			tmpB->SetPosition(Vector2(posX, posY));
+		}
 	}
+
+	
 
 	//CreateWalls
 	//leftWall
@@ -244,10 +265,6 @@ void Game::Shutdown()
 	}
 
 	UnloadData();
-	/*delete m_SpriteVerts;
-	m_SpriteShader->Unload();
-	delete m_SpriteShader;*/
-	// Shutdown the window.
 	ShutdownWindows();
 }
 

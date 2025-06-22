@@ -9,13 +9,7 @@ Brick::Brick(Game* game)
 	, m_SquareComponent(nullptr)
 {
 	// Initialize to random position/orientation
-	Vector2 randPos = Random::GetVector(Vector2(60.0f, 35.0f),
-		Vector2(-60.0f, -10.0f));
-	SetPosition(randPos);
-
 	SetRotation(Random::GetFloatRange(0.0f, 0.0f));
-
-	//HERE WE NEED TO CREATE A FILE PARSER FOR THE MAPS
 
 	// Create a sprite component
 	SpriteComponent* sc = new SpriteComponent(this);

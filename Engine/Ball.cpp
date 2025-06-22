@@ -19,7 +19,7 @@ Ball::Ball(Game* game)
 	Vector2 randPos = Vector2(0.0f, -30.0f);
 	SetPosition(randPos);
 
-	SetRotation(45.0f);
+	SetRotation(Math::ToRadians(45.0f));
 
 	// Create a sprite component
 	SpriteComponent* sc = new SpriteComponent(this);
@@ -58,20 +58,13 @@ void Ball::UpdateActor(float deltaTime)
 			float currentAngle = GetRotation();
 
 			// Rimbalzo con ±45° a seconda della direzione
-			if (fabs(diff.x) > fabs(diff.y)) // collisione da sinistra/destra
+			if (fabs(diff.x) >= fabs(diff.y)) // collisione da sinistra/destra
 			{
-				// Cambia direzione in orizzontale
-				if (diff.x > 0)
-					SetRotation(Math::ToRadians(135.0f)); // va in alto a sinistra
-				else
-					SetRotation(Math::ToRadians(45.0f));  // va in alto a destra
+				SetRotation(Math::Pi - GetRotation()); //bounce off the wall
 			}
 			else // collisione dall'alto/basso
 			{
-				if (diff.y > 0)
-					SetRotation(Math::ToRadians(315.0f)); // va in basso
-				else
-					SetRotation(Math::ToRadians(225.0f)); // va in alto
+				SetRotation(-GetRotation()); //bounce off the wall 
 			}
 
 			// The first Brick we intersect with,
@@ -87,33 +80,34 @@ void Ball::UpdateActor(float deltaTime)
 	{
 		// Reverse the direction of the ball
 		Vector2 ballPos = GetPosition();
-		Vector2 pltPos = plt->GetPosition();
-		Vector2 diff = ballPos - pltPos;
-
-		// Calcola l'angolo corrente
-		float currentAngle = GetRotation();
-						
-		if (diff.y > 0)
-			SetRotation(Math::ToRadians(315.0f)); // va in basso
-		else
-			SetRotation(Math::ToRadians(225.0f)); // va in alto
+		Vector2 platPos = plt->GetPosition();
+		Vector2 diff = ballPos - platPos;
+		if (diff.x < 0.0f) 
+		{
+			SetRotation(Math::ToRadians(135.0f + (Math::Abs(diff.x) * 5))); //bounce Left 
+		}
+		else 
+		{
+			SetRotation(Math::ToRadians(45.0f + (Math::Abs(diff.x) * 5))); //bounce Left 
+		}
+		
 	}
 	
 
 	// Screen Bouncing (for balls)
-	if (GetPosition().x < -70.0f) //collision with left "wall"
+	if (GetPosition().x < -65.0f) //collision with left "wall"
 	{
 		SetRotation(Math::Pi - GetRotation()); //bounce off the wall
 	}
-	else if (GetPosition().x > 70.0f) //collision with right "wall"
+	else if (GetPosition().x > 65.0f) //collision with right "wall"
 	{
 		SetRotation(Math::Pi - GetRotation()); //bounce off the wall
 	}
-	if (GetPosition().y < -40.0f) //collision with bottom "wall" Should Die here
+	if (GetPosition().y < -38.0f) //collision with bottom "wall" Should Die here
 	{
 		SetRotation(-GetRotation()); //bounce off the wall 
 	}
-	else if (GetPosition().y > 40.0f) //collision with upper "wall"
+	else if (GetPosition().y > 38.0f) //collision with upper "wall"
 	{
 		SetRotation(-GetRotation()); //bounce off the wall
 	}
