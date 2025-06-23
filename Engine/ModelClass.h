@@ -15,6 +15,7 @@ using namespace DirectX;
 // MY CLASS INCLUDES //
 ///////////////////////
 #include "TextureClass.h"
+#include "EnumDictionary.h"
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -22,7 +23,7 @@ using namespace DirectX;
 ////////////////////////////////////////////////////////////////////////////////
 class ModelClass
 {
-private:
+protected:
 
 	struct VertexType
 	{
@@ -34,26 +35,32 @@ public:
 	ModelClass();
 	ModelClass(const ModelClass&);
 	~ModelClass();
-	bool Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceContext, const char* textureFilename);
-	bool Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceContext);
-	void Shutdown();
-	void Render(ID3D11DeviceContext*);
+	virtual bool Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceContext) = 0;
+	virtual void Shutdown();
+	virtual void Render(ID3D11DeviceContext*);
 
 	int GetIndexCount();
 	ID3D11ShaderResourceView* GetTexture();
 
-private:
-	bool InitializeBuffers(ID3D11Device*);
+protected:
 	void ShutdownBuffers();
+	bool LoadTexture(ID3D11Device*, ID3D11DeviceContext*, const char*);
 	void RenderBuffers(ID3D11DeviceContext*);
-	bool LoadTexture(ID3D11Device*, ID3D11DeviceContext*,const char*);
+
+private:
+	//Initialize different buffers
+	virtual bool InitializeBuffers(ID3D11Device*) = 0;
+	/*bool InitializeBuffersSquare(ID3D11Device*);
+	bool InitializeBuffersRect(ID3D11Device*, float width, float height);*/
 	void ReleaseTexture();
 	void SetTexture(TextureClass* tex);
 	ID3D11ShaderResourceView* GetTextureView() const;
 
 private:
-	ID3D11Buffer* m_vertexBuffer, * m_indexBuffer;
-	int m_vertexCount, m_indexCount;
 	TextureClass* m_Texture;
+
+protected:
+	int m_vertexCount, m_indexCount;
+	ID3D11Buffer* m_vertexBuffer, * m_indexBuffer;
 };
 

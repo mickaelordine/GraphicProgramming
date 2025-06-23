@@ -16,7 +16,7 @@ BouncingWall::BouncingWall(class Game* game, Vector2 position, float rotation)
 	m_SquareComponent->SetHeight(25.0f);
 	m_SquareComponent->SetWidth(10000.0f);
 
-	SpriteComponent* sc = new SpriteComponent(this);
+	SpriteComponent* sc = new SpriteComponent(this, EnumDictionary::BufferType::Rectangle);
 	sc->SetTexture(game->GetTexture("Ball"));
 
 	// Add to bricks in game

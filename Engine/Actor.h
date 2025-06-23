@@ -4,6 +4,7 @@
 #include <cstdint>
 #include "SDL3/SDL.h"
 #include "InputClass.h"
+#include "EnumDictionary.h"
 
 class Actor
 {

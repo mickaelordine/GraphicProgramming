@@ -46,6 +46,12 @@
     <Filter Include="Source Files\Actor Files\SpecificActors">
       <UniqueIdentifier>{54acd261-fd41-4a1f-a298-9613d7d8f07b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Render Files\Models">
+      <UniqueIdentifier>{44ac5438-237e-4d37-9a88-7975a9ad9cc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Render Flies\Models">
+      <UniqueIdentifier>{68afd4f3-02ed-4d3e-abf2-89dec58600e3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputClass.h">
@@ -64,9 +70,6 @@
       <Filter>Header Files\Render Flies</Filter>
     </ClInclude>
     <ClInclude Include="D3DClass.h">
-      <Filter>Header Files\Render Flies</Filter>
-    </ClInclude>
-    <ClInclude Include="ModelClass.h">
       <Filter>Header Files\Render Flies</Filter>
     </ClInclude>
     <ClInclude Include="SystemClass.h">
@@ -120,6 +123,18 @@
     <ClInclude Include="Platform.h">
       <Filter>Header Files\Actor Files\SpecificActors</Filter>
     </ClInclude>
+    <ClInclude Include="EnumDictionary.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="SquareModel.h">
+      <Filter>Header Files\Render Flies\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelClass.h">
+      <Filter>Header Files\Render Flies\Models</Filter>
+    </ClInclude>
+    <ClInclude Include="RectModel.h">
+      <Filter>Header Files\Render Flies\Models</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -135,9 +150,6 @@
       <Filter>Source Files\Render Files</Filter>
     </ClCompile>
     <ClCompile Include="D3DClass.cpp">
-      <Filter>Source Files\Render Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ModelClass.cpp">
       <Filter>Source Files\Render Files</Filter>
     </ClCompile>
     <ClCompile Include="SystemClass.cpp">
@@ -193,6 +205,15 @@
     </ClCompile>
     <ClCompile Include="Platform.cpp">
       <Filter>Source Files\Actor Files\SpecificActors</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelClass.cpp">
+      <Filter>Source Files\Render Files\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="SquareModel.cpp">
+      <Filter>Source Files\Render Files\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="RectModel.cpp">
+      <Filter>Source Files\Render Files\Models</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

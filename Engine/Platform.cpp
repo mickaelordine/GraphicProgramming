@@ -23,8 +23,8 @@ Platform::Platform(Game* game)
 	SetRotation(0.0f);
 
 	// Create a sprite component
-	SpriteComponent* sc = new SpriteComponent(this);
-	sc->SetTexture(game->GetTexture("Platform"));
+	SpriteComponent* sc = new SpriteComponent(this, EnumDictionary::BufferType::Rectangle);
+	sc->SetTexture(game->GetTexture("Platform2"));
 
 	// Create a square component (for collision)
 	m_SquareComponent = new SquareComponent(this);

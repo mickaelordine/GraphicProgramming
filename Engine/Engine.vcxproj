@@ -148,6 +148,7 @@
     <ClInclude Include="ColorShaderClass.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="D3DClass.h" />
+    <ClInclude Include="EnumDictionary.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="InputClass.h" />
     <ClInclude Include="InputComponent.h" />
@@ -156,9 +157,11 @@
     <ClInclude Include="MoveComponent.h" />
     <ClInclude Include="Platform.h" />
     <ClInclude Include="Random.h" />
+    <ClInclude Include="RectModel.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SpriteComponent.h" />
     <ClInclude Include="SquareComponent.h" />
+    <ClInclude Include="SquareModel.h" />
     <ClInclude Include="SystemClass.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
       </ExcludedFromBuild>
@@ -186,8 +189,10 @@
     <ClCompile Include="MoveComponent.cpp" />
     <ClCompile Include="Platform.cpp" />
     <ClCompile Include="Random.cpp" />
+    <ClCompile Include="RectModel.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
     <ClCompile Include="SquareComponent.cpp" />
+    <ClCompile Include="SquareModel.cpp" />
     <ClCompile Include="SystemClass.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
       </ExcludedFromBuild>

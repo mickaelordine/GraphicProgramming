@@ -17,11 +17,11 @@ void InputComponent::ProcessInput(InputClass* keyState)
 {
 	// Calculate angular speed for MoveComponent
 	float horzSpeed = 0.0f;
-	if (keyState->IsKeyDown(VK_RIGHT) && m_Owner->GetPosition().x < 70.0f)
+	if (keyState->IsKeyDown(VK_RIGHT) && m_Owner->GetPosition().x < 60.0f)
 	{
 		horzSpeed += m_MaxHorzSpeed;
 	}
-	if (keyState->IsKeyDown(VK_LEFT) && m_Owner->GetPosition().x > -70.0f)
+	if (keyState->IsKeyDown(VK_LEFT) && m_Owner->GetPosition().x > -60.0f)
 	{
 		horzSpeed -= m_MaxHorzSpeed;
 	}

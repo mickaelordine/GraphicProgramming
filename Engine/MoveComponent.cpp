@@ -11,13 +11,6 @@ MoveComponent::MoveComponent(class Actor* owner, int updateOrder)
 
 void MoveComponent::Update(float deltaTime)
 {
-	/*if (!Math::NearZero(m_HorizzontalSpeed))
-	{
-		float rot = m_Owner->GetRotation();
-		rot += m_HorizzontalSpeed * deltaTime;
-		m_Owner->SetRotation(rot);
-	}*/
-
 	if (!Math::NearZero(m_HorizzontalSpeed))
 	{
 		Vector2 pos = m_Owner->GetPosition();

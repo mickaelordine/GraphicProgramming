@@ -3,9 +3,11 @@
 #include "Game.h"
 
 
-SpriteComponent::SpriteComponent(Actor* owner, int order) 
+
+SpriteComponent::SpriteComponent(class Actor* owner, EnumDictionary::BufferType type, int order)
 	: Component(owner)
 	, m_DrawOrder(order)
+	, m_Type(type)
 {
     m_Owner->GetGame()->AddSprite(this);
 }
@@ -33,13 +35,36 @@ void SpriteComponent::Draw(class ApplicationClass* mApp) {
     mApp->GetD3D()->GetProjectionMatrix(proj);
     // Render quad con la texture di questo sprite:
     mApp->GetD3D()->GetDeviceContext();
-    // Metti i vertex/index buffer:
-    mApp->GetModel()->Render(mApp->GetD3D()->GetDeviceContext());
-    // Imposta shader parameters e disegna:
-    mApp->GetTextureShader()->Render(
-        mApp->GetD3D()->GetDeviceContext(),
-        mApp->GetModel()->GetIndexCount(),
-        world, view, proj,
-        m_Texture->GetTexture()
-    );
+
+    switch (m_Type) 
+    {
+        case EnumDictionary::BufferType::Square:
+            // Metti i vertex/index buffer:
+            mApp->GetModelSquare()->Render(mApp->GetD3D()->GetDeviceContext());
+            // Imposta shader parameters e disegna:
+            mApp->GetTextureShader()->Render(
+                mApp->GetD3D()->GetDeviceContext(),
+                mApp->GetModelSquare()->GetIndexCount(),
+                world, view, proj,
+                m_Texture->GetTexture()
+            );
+            break;
+
+		case EnumDictionary::BufferType::Rectangle:
+            // Metti i vertex/index buffer:
+            mApp->GetModelRect()->Render(mApp->GetD3D()->GetDeviceContext());
+            // Imposta shader parameters e disegna:
+            mApp->GetTextureShader()->Render(
+                mApp->GetD3D()->GetDeviceContext(),
+                mApp->GetModelRect()->GetIndexCount(),
+                world, view, proj,
+                m_Texture->GetTexture()
+            );
+            break;
+
+        default:
+			// Not supported type, return early
+			return;
+    }
+    
 }

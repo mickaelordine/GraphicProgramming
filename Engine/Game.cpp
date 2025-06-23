@@ -143,7 +143,7 @@ void Game::GenerateOutput()
 		return;
 	}
 
-	m_ApplicationClass->GetD3D()->BeginScene(0.0f, 0.0f, 0.0f, 1.0f);// Clear the screen to black
+	m_ApplicationClass->GetD3D()->BeginScene(0.0f, 0.0f, 0.0f, 0.8f);// Clear the screen to black
 	m_ApplicationClass->GetCamera()->Render();
 
 	for (auto sprite : m_Sprites) {
@@ -180,7 +180,8 @@ void Game::LoadData()
 	LoadTexture("Bisio", "../Engine/Textures/Claudio_Bisio.tga");
 	LoadTexture("Brick", "../Engine/Textures/Brick.tga");
 	LoadTexture("Ball", "../Engine/Textures/sample-tga-files-sample_640x426.tga");
-	LoadTexture("Platform", "../Engine/Textures/arkanoidPlatform.tga");
+	LoadTexture("Platform1", "../Engine/Textures/arkanoidPlatform.tga");
+	LoadTexture("Platform2", "../Engine/Textures/PlatformSkin2.tga");
 
 	//create Player Platform
 	m_Platform = new Platform(this);
@@ -213,9 +214,7 @@ void Game::LoadData()
 			tmpB->SetPosition(Vector2(posX, posY));
 		}
 	}
-
 	
-
 	//CreateWalls
 	//leftWall
 	//new BouncingWall(this, Vector2(0.0f, 0.0f), 180.0f);

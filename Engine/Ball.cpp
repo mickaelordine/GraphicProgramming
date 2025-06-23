@@ -22,12 +22,12 @@ Ball::Ball(Game* game)
 	SetRotation(Math::ToRadians(45.0f));
 
 	// Create a sprite component
-	SpriteComponent* sc = new SpriteComponent(this);
+	SpriteComponent* sc = new SpriteComponent(this, EnumDictionary::BufferType::Square);
 	sc->SetTexture(game->GetTexture("Bisio"));
 
 	// Create a square component (for collision)
 	m_CircleComponent = new CircleComponent(this);
-	m_CircleComponent->SetRadius(1.0f);
+	m_CircleComponent->SetRadius(1.5f);
 
 	// Create a move component, and set a forward speed
 	m_MoveComponent = new MoveComponent(this);
