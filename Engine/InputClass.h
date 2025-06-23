@@ -20,6 +20,7 @@ public:
 	void KeyUp(unsigned int);
 
 	bool IsKeyDown(unsigned int);
+	bool GetKeys() { return m_keys; }
 
 private:
 	bool m_keys[256];

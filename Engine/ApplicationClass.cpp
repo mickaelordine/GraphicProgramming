@@ -7,7 +7,8 @@ ApplicationClass::ApplicationClass()
 {
 	m_Direct3D = nullptr;
 	m_Camera = nullptr;
-	m_Model = nullptr;
+	m_ModelSquare = nullptr;
+	m_ModelRect = nullptr;
 	m_ColorShader = nullptr;
 	m_TextureShader = nullptr;
 }
@@ -25,7 +26,6 @@ ApplicationClass::~ApplicationClass()
 
 bool ApplicationClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 {
-	char textureFilename[128];
 	bool result;
 
 
@@ -43,18 +43,25 @@ bool ApplicationClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	m_Camera = new CameraClass;
 
 	// Set the initial position of the camera.
-	m_Camera->SetPosition(0.0f, 0.0f, -15.0f);
+	m_Camera->SetPosition(0.0f, 0.0f, -90.0f);
 
-	// Create and initialize the model object.
-	m_Model = new ModelClass;
-
-	// Set the name of the texture file that we will be loading.
-	strcpy_s(textureFilename, "../Engine/Claudio_Bisio.tga");
-
-	result = m_Model->Initialize(m_Direct3D->GetDevice(), m_Direct3D->GetDeviceContext(), textureFilename);
+	// Create and initialize the square model object.
+	m_ModelSquare = new SquareModel(3.0f);
+	
+	result = m_ModelSquare->Initialize(m_Direct3D->GetDevice(), m_Direct3D->GetDeviceContext());
 	if (!result)
 	{
-		MessageBox(hwnd, L"Could not initialize the color shader object.", L"Error", MB_OK);
+		MessageBox(hwnd, L"Could not initialize the Square shader object.", L"Error", MB_OK);
+		return false;
+	}
+
+	// Create and initialize the square rect object.
+	m_ModelRect = new RectModel(6.0f, 2.0f);
+
+	result = m_ModelRect->Initialize(m_Direct3D->GetDevice(), m_Direct3D->GetDeviceContext());
+	if (!result)
+	{
+		MessageBox(hwnd, L"Could not initialize the Rect shader object.", L"Error", MB_OK);
 		return false;
 	}
 
@@ -84,12 +91,20 @@ void ApplicationClass::Shutdown()
 		m_TextureShader = nullptr;
 	}
 
-	// Release the model object.
-	if (m_Model)
+	// Release the modelSquare object.
+	if (m_ModelSquare)
 	{
-		m_Model->Shutdown();
-		delete m_Model;
-		m_Model = nullptr;
+		m_ModelSquare->Shutdown();
+		delete m_ModelSquare;
+		m_ModelSquare = nullptr;
+	}
+
+	// Release the modelRect object.
+	if (m_ModelRect)
+	{
+		m_ModelRect->Shutdown();
+		delete m_ModelRect;
+		m_ModelRect = nullptr;
 	}
 
 	// Release the camera object.
@@ -145,10 +160,20 @@ bool ApplicationClass::Render()
 	m_Direct3D->GetProjectionMatrix(projectionMatrix);
 
 	// Put the model vertex and index buffers on the graphics pipeline to prepare them for drawing.
-	m_Model->Render(m_Direct3D->GetDeviceContext());
+	m_ModelSquare->Render(m_Direct3D->GetDeviceContext());
 
 	// Render the model using the texture shader.
-	result = m_TextureShader->Render(m_Direct3D->GetDeviceContext(), m_Model->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix, m_Model->GetTexture());
+	result = m_TextureShader->Render(m_Direct3D->GetDeviceContext(), m_ModelSquare->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix, m_ModelSquare->GetTexture());
+	if (!result)
+	{
+		return false;
+	}
+
+	// Put the model vertex and index buffers on the graphics pipeline to prepare them for drawing.
+	m_ModelRect->Render(m_Direct3D->GetDeviceContext());
+
+	// Render the model using the texture shader.
+	result = m_TextureShader->Render(m_Direct3D->GetDeviceContext(), m_ModelRect->GetIndexCount(), worldMatrix, viewMatrix, projectionMatrix, m_ModelRect->GetTexture());
 	if (!result)
 	{
 		return false;

@@ -17,7 +17,7 @@
 // MY CLASS INCLUDES //
 ///////////////////////
 #include "inputclass.h"
-#include "applicationclass.h"
+#include "ApplicationClass.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 // Class name: SystemClass
@@ -33,7 +33,7 @@ public:
 	void Shutdown();
 	void Run();
 
-	LRESULT CALLBACK MessageHandler(HWND, UINT, WPARAM, LPARAM);
+	//LRESULT CALLBACK MessageHandler(HWND, UINT, WPARAM, LPARAM);
 
 private:
 	bool Frame();
