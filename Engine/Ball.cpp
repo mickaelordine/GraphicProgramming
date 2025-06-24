@@ -19,15 +19,15 @@ Ball::Ball(Game* game)
 	Vector2 randPos = Vector2(0.0f, -30.0f);
 	SetPosition(randPos);
 
-	SetRotation(Math::ToRadians(45.0f));
+	SetRotation(Random::GetFloatRange(Math::ToRadians(45.0f),Math::ToRadians(135.0f)));
 
 	// Create a sprite component
-	SpriteComponent* sc = new SpriteComponent(this, EnumDictionary::BufferType::Square);
-	sc->SetTexture(game->GetTexture("Bisio"));
+	SpriteComponent* sc = new SpriteComponent(this, EnumDictionary::BufferType::Circle);
+	sc->SetTexture(game->GetTexture("Ball1"));
 
 	// Create a square component (for collision)
 	m_CircleComponent = new CircleComponent(this);
-	m_CircleComponent->SetRadius(1.5f);
+	m_CircleComponent->SetRadius(1.0f);
 
 	// Create a move component, and set a forward speed
 	m_MoveComponent = new MoveComponent(this);
@@ -58,13 +58,13 @@ void Ball::UpdateActor(float deltaTime)
 			float currentAngle = GetRotation();
 
 			// Rimbalzo con ±45° a seconda della direzione
-			if (fabs(diff.x) >= fabs(diff.y)) // collisione da sinistra/destra
+			if (fabs(diff.x) < (brk->GetSquareComponent()->GetWidth()/2) && fabs(diff.y) > (brk->GetSquareComponent()->GetHeight()/2)) // collisione dall'alto/basso
 			{
-				SetRotation(Math::Pi - GetRotation()); //bounce off the wall
+				SetRotation(-GetRotation());
 			}
-			else // collisione dall'alto/basso
+			else // collisione dall'sinistra/destra
 			{
-				SetRotation(-GetRotation()); //bounce off the wall 
+				SetRotation(Math::Pi - GetRotation()); //bounce off the wall 
 			}
 
 			// The first Brick we intersect with,
@@ -105,7 +105,7 @@ void Ball::UpdateActor(float deltaTime)
 	}
 	if (GetPosition().y < -38.0f) //collision with bottom "wall" Should Die here
 	{
-		SetRotation(-GetRotation()); //bounce off the wall 
+		GetGame()->LoseCondition(); //Game Over
 	}
 	else if (GetPosition().y > 38.0f) //collision with upper "wall"
 	{

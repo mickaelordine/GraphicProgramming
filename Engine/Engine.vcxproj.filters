@@ -135,6 +135,9 @@
     <ClInclude Include="RectModel.h">
       <Filter>Header Files\Render Flies\Models</Filter>
     </ClInclude>
+    <ClInclude Include="CircleModel.h">
+      <Filter>Header Files\Render Flies\Models</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -213,6 +216,9 @@
       <Filter>Source Files\Render Files\Models</Filter>
     </ClCompile>
     <ClCompile Include="RectModel.cpp">
+      <Filter>Source Files\Render Files\Models</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleModel.cpp">
       <Filter>Source Files\Render Files\Models</Filter>
     </ClCompile>
   </ItemGroup>

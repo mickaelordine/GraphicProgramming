@@ -9,6 +9,7 @@ ApplicationClass::ApplicationClass()
 	m_Camera = nullptr;
 	m_ModelSquare = nullptr;
 	m_ModelRect = nullptr;
+	m_ModelCircle = nullptr;
 	m_ColorShader = nullptr;
 	m_TextureShader = nullptr;
 }
@@ -62,6 +63,13 @@ bool ApplicationClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	if (!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the Rect shader object.", L"Error", MB_OK);
+		return false;
+	}
+
+	m_ModelCircle = new CircleModel(1.0f);
+	result = m_ModelCircle->Initialize(m_Direct3D->GetDevice(), m_Direct3D->GetDeviceContext());
+	if (!result) {
+		MessageBox(hwnd, L"Could not initialize the Circle shader object.", L"Error", MB_OK);
 		return false;
 	}
 

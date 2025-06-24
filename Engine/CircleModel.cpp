@@ -1,6 +1,6 @@
-#include "RectModel.h"
+#include "CircleModel.h"
 
-bool RectModel::Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceContext)
+bool CircleModel::Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceContext)
 {
 	bool result = InitializeBuffers(device);
 	if (!result)
@@ -13,28 +13,31 @@ bool RectModel::Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceCont
 	return true;
 }
 
-void RectModel::Render(ID3D11DeviceContext* deviceContext)
+void CircleModel::Render(ID3D11DeviceContext* deviceContext)
 {
 	RenderBuffers(deviceContext); // Render the buffers
 }
 
-void RectModel::Shutdown()
+void CircleModel::Shutdown()
 {
 	ShutdownBuffers();
 }
 
-bool RectModel::InitializeBuffers(ID3D11Device* device)
+
+bool CircleModel::InitializeBuffers(ID3D11Device* device)
 {
 	VertexType* vertices;
 	unsigned long* indices;
 	D3D11_BUFFER_DESC vertexBufferDesc, indexBufferDesc;
 	D3D11_SUBRESOURCE_DATA vertexData, indexData;
 	HRESULT result;
-	m_vertexCount = 4;
-	m_indexCount = 4;
 
-	float hw = m_Width * 0.5f;
-	float hh = m_Height * 0.5f;
+	int numSegments = 12;
+	m_vertexCount = 14; // 1 centro + numSegments + 1 per chiusura
+
+	// Set the number of indices in the index array.
+	m_indexCount = 14;
+	m_indexCount = numSegments * 3;
 
 	// Create the vertex array.
 	vertices = new VertexType[m_vertexCount];
@@ -51,27 +54,35 @@ bool RectModel::InitializeBuffers(ID3D11Device* device)
 	}
 
 	///////////////////////////////////
-	// LOADING INFORMATION TO RENDER A Rect (4 VERTICES)
+	// LOADING INFORMATION TO RENDER A sphere (14 VERTICES)
 	///////////////////////////////////
 
-	// Load the vertex array with data.
-	vertices[0].position = XMFLOAT3(-hw, -hh, 0.0f);  // Bottom left.
-	vertices[0].texture = XMFLOAT2(0.0f, 1.0f);
+	vertices[0].position = XMFLOAT3(0.0f, 0.0f, 0.0f); // centro
+	vertices[0].texture = XMFLOAT2(0.5f, 0.5f); // centro texture
 
-	vertices[1].position = XMFLOAT3(-hw, hh, 0.0f);	  // Top left.
-	vertices[1].texture = XMFLOAT2(0.0f, 0.0f);
+	for (int i = 0; i <= numSegments; ++i) {
+		float angle = i * 2.0f * 3.14159265f / numSegments;
+		float x = cosf(angle);
+		float y = sinf(angle);
 
-	vertices[2].position = XMFLOAT3(hw, -hh, 0.0f);   // Bottom right.
-	vertices[2].texture = XMFLOAT2(1.0f, 1.0f);
+		int vi = i + 1; // vertice corrente (offset di +1 per lasciare posto al centro)
+		vertices[vi].position = XMFLOAT3(x * m_Size, y * m_Size, 0.0f);
+		float u = (x * 0.5f) + 0.5f;
+		float v = (-y * 0.5f) + 0.5f;
+		vertices[vi].texture = XMFLOAT2(u, v);
+	}
 
-	vertices[3].position = XMFLOAT3(hw, hh, 0.0f);    // Top right.
-	vertices[3].texture = XMFLOAT2(1.0f, 0.0f);
+	// centro è 0
+	for (int i = 0; i < numSegments; ++i) {
+		indices[i * 3 + 0] = 0;            // centro
+		indices[i * 3 + 1] = i + 1;        // vertice corrente
+		indices[i * 3 + 2] = i + 2;        // vertice successivo (chiude il triangolo)
+	}
+	
 
-	// Load the index array with data.
-	indices[0] = 0;  // Bottom left.
-	indices[1] = 1;  // Top middle.
-	indices[2] = 2;  // Bottom right.
-	indices[3] = 3;  // Bottom right.
+	///////////////////////////////////
+	// LOADING INFORMATION TO RENDER A Sphere (14 VERTICES)
+	///////////////////////////////////
 
 	// Set up the description of the static vertex buffer.
 	vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;

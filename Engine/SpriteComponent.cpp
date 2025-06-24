@@ -62,6 +62,18 @@ void SpriteComponent::Draw(class ApplicationClass* mApp) {
             );
             break;
 
+		case EnumDictionary::BufferType::Circle:
+            // Metti i vertex/index buffer:
+            mApp->GetModelCircle()->Render(mApp->GetD3D()->GetDeviceContext());
+            // Imposta shader parameters e disegna:
+            mApp->GetTextureShader()->Render(
+                mApp->GetD3D()->GetDeviceContext(),
+                mApp->GetModelCircle()->GetIndexCount(),
+                world, view, proj,
+                m_Texture->GetTexture()
+            );
+            break;
+
         default:
 			// Not supported type, return early
 			return;
