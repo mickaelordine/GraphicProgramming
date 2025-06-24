@@ -55,7 +55,10 @@ bool Game::Initialize()
 	// Setup altri componenti (actor system, shader logici, game logic, ecc.)
 	LoadData();
 
-	m_TicksCount = SDL_GetTicks();
+	ptime = clock();    // Time since last frame
+	offset = 0;         // Time since last physics tick
+
+	m_TicksCount = deltaTime(ptime,offset);
 
 	return true;
 }
@@ -64,6 +67,7 @@ void Game::RunLoop()
 {
 	while (m_IsRunning)
 	{
+
 		ProcessInput();
 		UpdateGame();
 		RunSystem();
@@ -91,21 +95,21 @@ void Game::UpdateGame()
 {
 	// Compute delta time
 	// Wait until 16ms has elapsed since last frame
-	while (!(SDL_GetTicks() >= m_TicksCount + 16))
+	while (!(deltaTime(ptime, offset) >= m_TicksCount + 16))
 		;
 
-	float deltaTime = (SDL_GetTicks() - m_TicksCount) / 1000.0f;
-	if (deltaTime > 0.05f)
+	float dt = (deltaTime(ptime, offset) - m_TicksCount) / 1000.0f;
+	if (dt > 0.05f)
 	{
-		deltaTime = 0.05f;
+		dt = 0.05f;
 	}
-	m_TicksCount = SDL_GetTicks();
+	m_TicksCount = deltaTime(ptime, offset);
 
 	// Update all actors
 	m_UpdatingActors = true;
 	for (auto actor : m_Actors)
 	{
-		actor->Update(deltaTime);
+		actor->Update(dt);
 	}
 	m_UpdatingActors = false;
 
@@ -182,6 +186,7 @@ void Game::LoadData()
 	LoadTexture("Ball", "../Engine/Textures/sample-tga-files-sample_640x426.tga");
 	LoadTexture("Platform1", "../Engine/Textures/arkanoidPlatform.tga");
 	LoadTexture("Platform2", "../Engine/Textures/PlatformSkin2.tga");
+	LoadTexture("Ball1", "../Engine/Textures/Ball2.tga");
 
 	//create Player Platform
 	m_Platform = new Platform(this);
@@ -195,7 +200,7 @@ void Game::LoadData()
 
 	float minX = -60.0f;
 	float maxX = 60.0f;
-	float minY = -10.0f;
+	float minY = 0.0f;
 	float maxY = 35.0f;
 
 	// Calcola passo tra i brick
@@ -214,19 +219,15 @@ void Game::LoadData()
 			tmpB->SetPosition(Vector2(posX, posY));
 		}
 	}
-	
-	//CreateWalls
-	//leftWall
-	//new BouncingWall(this, Vector2(0.0f, 0.0f), 180.0f);
-	////rightWall
-	//new BouncingWall(this, Vector2(70.0f, 0.0f), 90.0f);
-	////topWall
-	//new BouncingWall(this, Vector2(0.0f, 60.0f), 0.0f);
-	////bottomWall
-	//new BouncingWall(this, Vector2(0.0f, -60.0f), 0.0f);
+}
 
-	
-
+void Game::CheckWinCondition() 
+{
+	Shutdown();
+}
+void Game::LoseCondition()
+{
+	Shutdown();
 }
 
 void Game::UnloadData()
@@ -237,14 +238,6 @@ void Game::UnloadData()
 	{
 		delete m_Actors.back();
 	}
-
-	// Destroy textures
-	/*for (auto i : m_Textures)
-	{
-		i.second->Unload();
-		delete i.second;
-	}
-	m_Textures.clear();*/
 }
 
 void Game::Shutdown()
@@ -367,9 +360,14 @@ void Game::RemoveWalls(class BouncingWall* wall)
 //SYSTEMCLASS INTEGRATION INSIDE GAME
 /////////////////////////////////////
 
+int Game::deltaTime(int previous, int offset)
+{
+	return (clock() - previous) + offset;
+}
+
 void Game::RunSystem() {
 	MSG msg;
-	bool done, result;
+	bool done;
 
 
 	// Initialize the message structure.

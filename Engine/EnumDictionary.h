@@ -6,7 +6,8 @@ public:
 	{
 		Square = 0,
 		Rectangle = 1,
-		None = 2
+		Circle = 2,
+		None = 3
 	};
 
 };

@@ -76,12 +76,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions);WIN32;_DEBUG;_CONSOLE;_UNICODE;UNICODE;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\external\SDL\include; $(SolutionDir);  %(AdditionalIncludeDirectories);</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);  %(AdditionalIncludeDirectories);</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)..\external\SDL\lib\win\x86;%(AdditionalLibraryDirectories);</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);</AdditionalLibraryDirectories>
       <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);$(SolutionDir)..\external\SDL\lib\win\x86\SDL2.lib;$(SolutionDir)..\external\SDL\lib\win\x86\SDL2main.lib;</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -108,16 +108,17 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_UNICODE;UNICODE;_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\..\External\SDL3\include; %(AdditionalIncludeDirectories);</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)External\SDL3\lib\x64;%(AdditionalLibraryDirectories);</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);..\..\External\SDL3\lib\x64\SDL3_test.lib;..\..\External\SDL3\lib\x64\SDL3.lib;</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(SolutionDir)..\External\SDL3\lib\x64\*.dll" "$(OutDir)" /i /s /y</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -145,6 +146,7 @@
     <ClInclude Include="Brick.h" />
     <ClInclude Include="CameraClass.h" />
     <ClInclude Include="CircleComponent.h" />
+    <ClInclude Include="CircleModel.h" />
     <ClInclude Include="ColorShaderClass.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="D3DClass.h" />
@@ -177,6 +179,7 @@
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="CameraClass.cpp" />
     <ClCompile Include="CircleComponent.cpp" />
+    <ClCompile Include="CircleModel.cpp" />
     <ClCompile Include="ColorShaderClass.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="D3DClass.cpp" />

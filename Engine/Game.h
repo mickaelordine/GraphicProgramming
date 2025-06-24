@@ -8,8 +8,6 @@
 // INCLUDES //
 //////////////
 #include <windows.h>
-
-#include "SDL3/SDL.h"
 #include <unordered_map>
 #include <string>
 #include <vector>
@@ -19,6 +17,7 @@
 #include <algorithm>
 #include <iostream>
 
+#include <time.h>
 #include "Actor.h"
 #include "SpriteComponent.h"
 #include "SystemClass.h"
@@ -54,8 +53,10 @@ public:
 	void RemoveBalls(class Ball* ball);
 	void AddWalls(class BouncingWall* wall);
 	void RemoveWalls(class BouncingWall* wall);
-	/*void RemoveAsteroid(class Asteroid* ast);
-	std::vector<class Asteroid*>& GetAsteroids() { return mAsteroids; }*/
+	int deltaTime(int previous, int offset); 
+	void CheckWinCondition();
+	void LoseCondition();
+	
 private:
 	void ProcessInput();
 	void UpdateGame();
@@ -63,6 +64,7 @@ private:
 	bool LoadTexture(const std::string& name,const char* filepath);
 	void LoadData();
 	void UnloadData();
+	
 
 	//SystemClass integration
 	void InitializeWindows(int&, int&);
@@ -78,11 +80,6 @@ private:
 	// All the sprite components drawn
 	std::vector<class SpriteComponent*> m_Sprites;
 
-	//// Sprite shader
-	//class Shader* m_SpriteShader;
-	//// Sprite vertex array
-	//class VertexArray* m_SpriteVerts;
-
 	//SystemClassIntegration procedure
 	class ApplicationClass* m_ApplicationClass;
 	HWND m_Hwnd;
@@ -90,13 +87,14 @@ private:
 	HINSTANCE m_hinstance;
 	InputClass* m_Input;
 
-
-	/*SDL_Window* m_Window;
-	SDL_GLContext m_Context;*/
-	Uint64 m_TicksCount;
+	INT64 m_TicksCount;
 	bool m_IsRunning;
 	// Track if we're updating actors right now
 	bool m_UpdatingActors;
+
+	// Initial time variables
+	int ptime;			// Time since last frame
+	int offset = 0;		// Time since last tick
 
 	
 
