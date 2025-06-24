@@ -8,7 +8,7 @@ bool RectModel::Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceCont
 		return false; // Failed to initialize buffers
 	}
 
-	LoadTexture(device, deviceContext, "../Engine/Textures/Claudio_Bisio.tga"); // Load a default texture
+	LoadTexture(device, deviceContext, "../Engine/Textures/sample-tga-files-sample_640x426.tga"); // Load a default texture
 
 	return true;
 }

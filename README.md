@@ -14,9 +14,7 @@ NOTES:
 
 TODO:
 d. creare una condizione di vittoria
-a. migliora il rimbalzo della palla -> migliorato con questa formula 
-    ho guardato se il rimablzo della palla avviene con una x compresa tra la metà della lunghezza del brick e una y inferiore all'altezza, allora siamo Sotto/sopra, altrimenti destra e sinistra.
-
 b. fare in modo che quando perdi, non perdi davvero ma si ricarica il livello, capire come fare.
+
 
 c. creare il power up dei proiettili (?)

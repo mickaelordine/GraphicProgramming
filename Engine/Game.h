@@ -56,6 +56,7 @@ public:
 	int deltaTime(int previous, int offset); 
 	void CheckWinCondition();
 	void LoseCondition();
+	void Reset();
 	
 private:
 	void ProcessInput();

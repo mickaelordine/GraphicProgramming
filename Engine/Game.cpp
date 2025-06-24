@@ -181,7 +181,6 @@ TextureClass* Game::GetTexture(const std::string& name) {
 void Game::LoadData()
 {
 	//load all the necessary texture for the game
-	LoadTexture("Bisio", "../Engine/Textures/Claudio_Bisio.tga");
 	LoadTexture("Brick", "../Engine/Textures/Brick.tga");
 	LoadTexture("Ball", "../Engine/Textures/sample-tga-files-sample_640x426.tga");
 	LoadTexture("Platform1", "../Engine/Textures/arkanoidPlatform.tga");
@@ -227,7 +226,47 @@ void Game::CheckWinCondition()
 }
 void Game::LoseCondition()
 {
-	Shutdown();
+	Reset();
+}
+
+void Game::Reset()
+{
+	for(auto actor : m_Actors)
+	{
+		actor->SetState(Actor::EDead);
+	}
+
+	//create Player Platform
+	m_Platform = new Platform(this);
+
+	//create ball
+	new Ball(this);
+
+	// Create Bricks
+	const int numBricks = 11;
+	const int numRows = 4;
+
+	float minX = -60.0f;
+	float maxX = 60.0f;
+	float minY = 0.0f;
+	float maxY = 35.0f;
+
+	// Calcola passo tra i brick
+	float stepX = (maxX - minX) / (numBricks - 1); // -60 to 60
+	float stepY = (maxY - minY) / (numRows - 1);   // -10 to 35
+
+	for (int j = 0; j < numRows; j++)
+	{
+		for (int i = 0; i < numBricks; i++)
+		{
+			Brick* tmpB = new Brick(this);
+
+			float posX = minX + i * stepX;
+			float posY = minY + j * stepY;
+
+			tmpB->SetPosition(Vector2(posX, posY));
+		}
+	}
 }
 
 void Game::UnloadData()
