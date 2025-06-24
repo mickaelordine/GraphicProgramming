@@ -222,7 +222,8 @@ void Game::LoadData()
 
 void Game::CheckWinCondition() 
 {
-	Shutdown();
+	if(m_Bricks.size() == 0)
+		Shutdown();
 }
 void Game::LoseCondition()
 {
@@ -377,6 +378,7 @@ void Game::RemoveBricks(class Brick* brk) {
 	{
 		m_Bricks.erase(iter);
 	}
+	CheckWinCondition();
 }
 void Game::RemoveBalls(class Ball* ball) {
 	auto iter = std::find(m_Balls.begin(),
